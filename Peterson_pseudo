@@ -1,0 +1,21 @@
+int turn = 0;
+bool flag[2] = {false, false};
+
+Process 0:
+    flag[0] = true;
+    turn = 1;
+    while (flag[1] && turn == 1);
+    // Critical section
+    ...
+    // End of critical section
+    flag[0] = false;
+
+Process 1:
+    flag[1] = true;
+    turn = 0;
+    while (flag[0] && turn == 0);
+    // Critical section
+    ...
+    // End of critical section
+    flag[1] = false;
+
