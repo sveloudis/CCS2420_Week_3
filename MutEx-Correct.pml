@@ -15,6 +15,7 @@ proctype process1() {
       od
     // critical section
     printf("Process 1 in critical section\n");
+    value++; value--;
     // release critical section
     turn = 0;
   od
@@ -34,6 +35,7 @@ proctype process2() {
       od
     // critical section
     printf("Process 2 in critical section\n");
+    value++; value--;
     // release critical section
     turn = 1;
   od
@@ -42,6 +44,6 @@ proctype process2() {
 init {
   run process1();
   run process2();
-
-  assert(value >= 0 && value <= 1)
 }
+
+ltl p {[](value .+ 0  value<=1)}
